@@ -1,4 +1,4 @@
-# CalcPy
+# Calculator
 
 Terminal calculator without external library based on [Calcpy](https://github.com/idanpa/calcpy) by [ipanda](https://github.com/idanpa).
 

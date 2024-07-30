@@ -28,12 +28,9 @@ public class Main {
                 postfix = calculator.ShuntingYard(tokens);
                 output = calculator.evaluate(postfix);
                 //Output the result
-                System.out.println("Out [" + index + "]: ");
-                System.out.println("Postfix: " + postfix);
-                System.out.println("Result: " + output);
+                System.out.println("Out [" + index + "]: " + output);
                 index++;
             }
-           System.out.println(tokens);
             //Exit time delay
             try {
                 Thread.sleep(delay);
