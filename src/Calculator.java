@@ -45,7 +45,7 @@ public class Calculator {
         }
         return tokens;
     }
-
+    //Check if token is binary operator
     public static boolean isBinaryOperator (char operator) {
         return operator == '+' || operator == '-' || operator == '*' || operator == '/';
     }
@@ -89,6 +89,8 @@ public class Calculator {
         return output;
     }
 
+    //public
+
     //Precedence of each operator
     private static int precedence (String operator) {
         switch (operator) {
@@ -104,6 +106,7 @@ public class Calculator {
                 return 0;
         }
     }
+    //Check if token is number
     private static boolean isNumber(String token) {
         try {
             Double.parseDouble(token);
@@ -111,5 +114,36 @@ public class Calculator {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public double evaluate (List<String> Postfix) {
+        Stack<Double> stack = new Stack<>();
+        for (String token : Postfix) {
+            if (isNumber(token)) {
+                stack.push(Double.parseDouble(token));
+            } else {
+                double b = stack.pop();
+                if (token.equals("u-")) {
+                    stack.push(-b);
+                } else {
+                    double a = stack.pop();
+                    switch (token) {
+                        case "+":
+                            stack.push(a + b);
+                            break;
+                        case "-":
+                            stack.push(a - b);
+                            break;
+                        case "*":
+                            stack.push(a * b);
+                            break;
+                        case "/":
+                            stack.push(a / b);
+                            break;
+                    }
+                }
+            }
+        }
+        return stack.pop();
     }
 }

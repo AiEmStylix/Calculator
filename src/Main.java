@@ -7,30 +7,33 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String input = "(-2+3+4 * 5)*5-5;";
+        String input = "";
 
         //Delay time when exit the program
         int delay = 2000;
 
         int index = 0;
         List<String> tokens = new ArrayList<>();
-        List<String> prefix = new ArrayList<>();
+        List<String> postfix = new ArrayList<>();
+        double output;
         Calculator calculator = new Calculator();
         //The main loop
-//            while (true) {
-//                System.out.print("[" + index + "]: ");
-//                //input = scanner.nextLine();
-//                if (input.equalsIgnoreCase("exit")) {
-//                    break;
-//                }
-//                tokens = Calculator.tokenize(input);
-//                index++;
-//            }
-        tokens = Calculator.tokenize(input);
-        prefix = calculator.ShuntingYard(tokens);
-        System.out.println("Tokens: " + tokens);
-        System.out.println("Preflix: " + prefix);
-            System.out.println(tokens);
+            while (true) {
+                System.out.print("In [" + index + "]: ");
+                input = scanner.nextLine();
+                if (input.equalsIgnoreCase("exit")) {
+                    break;
+                }
+                tokens = Calculator.tokenize(input);
+                postfix = calculator.ShuntingYard(tokens);
+                output = calculator.evaluate(postfix);
+                //Output the result
+                System.out.println("Out [" + index + "]: ");
+                System.out.println("Postfix: " + postfix);
+                System.out.println("Result: " + output);
+                index++;
+            }
+           System.out.println(tokens);
             //Exit time delay
             try {
                 Thread.sleep(delay);
