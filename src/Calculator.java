@@ -91,6 +91,45 @@ public class Calculator {
 
     //public
 
+    public static boolean isArithmetic(String expression) {
+        if (expression == null || expression.isEmpty()) {
+            return false;
+        }
+
+        // Remove all whitespace from the expression
+        expression = expression.replaceAll("\\s", "");
+
+        // Check for balanced parentheses
+        int parenthesesCount = 0;
+        for (char c : expression.toCharArray()) {
+            if (c == '(') {
+                parenthesesCount++;
+            } else if (c == ')') {
+                parenthesesCount--;
+            }
+            if (parenthesesCount < 0) {
+                return false;
+            }
+        }
+        if (parenthesesCount != 0) {
+            return false;
+        }
+
+        // Check for valid characters and patterns
+        String regex = "^[0-9+\\-*/()]+$";
+        if (!expression.matches(regex)) {
+            return false;
+        }
+
+        // Check for invalid sequences of operators or operands
+        regex = "(?<!^)[+\\-*/](?=[+\\-*/])|^[+*/]|[+\\-*/]$|\\(\\)|\\([+\\-*/]|[+\\-*/]\\)";
+
+        if (expression.matches(".*" + regex + ".*")) {
+            return false;
+        }
+
+        return true;
+    }
     //Precedence of each operator
     private static int precedence (String operator) {
         switch (operator) {

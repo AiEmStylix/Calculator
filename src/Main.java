@@ -7,16 +7,17 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        //Initialized empty string
         String input = "";
-
         //Delay time when exit the program
         int delay = 2000;
 
         int index = 0;
         List<String> tokens = new ArrayList<>();
         List<String> postfix = new ArrayList<>();
-        double output;
+        double output = 0;
         Calculator calculator = new Calculator();
+        BaseConverter baseConverter = new BaseConverter();
         //The main loop
             while (true) {
                 System.out.print("In [" + index + "]: ");
@@ -24,9 +25,14 @@ public class Main {
                 if (input.equalsIgnoreCase("exit")) {
                     break;
                 }
-                tokens = Calculator.tokenize(input);
-                postfix = calculator.ShuntingYard(tokens);
-                output = calculator.evaluate(postfix);
+                if (baseConverter.isBinary(input)) {
+                    output = baseConverter.binaryToDecimal(input);
+                }
+                if (calculator.isArithmetic(input)) {
+                    tokens = Calculator.tokenize(input);
+                    postfix = calculator.ShuntingYard(tokens);
+                    output = calculator.evaluate(postfix);
+                }
                 //Output the result
                 System.out.println("Out [" + index + "]: " + output);
                 index++;
