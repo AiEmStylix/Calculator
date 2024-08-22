@@ -18,7 +18,7 @@ public class BaseConverter {
 //        }
 //    }
 
-    public double binaryToDecimal(String expression) {
+    public int binaryToDecimal(String expression) {
         //Initialized decimal
         int decimal = 0;
         int len = expression.length();

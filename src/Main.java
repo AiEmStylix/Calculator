@@ -7,36 +7,48 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         //Initialized empty string
-        String input = "";
+        String input = " ";
         //Delay time when exit the program
         int delay = 2000;
 
         int index = 0;
+
+        //Dynamic Array For Arithmetic Expression
         List<String> tokens = new ArrayList<>();
         List<String> postfix = new ArrayList<>();
-        double output = 0;
+
+        double arithmeticOutput = 0;
+        int binaryOutput = 0;
+
+        //Create object
         Calculator calculator = new Calculator();
         BaseConverter baseConverter = new BaseConverter();
+
         //The main loop
             while (true) {
                 System.out.print("In [" + index + "]: ");
                 input = scanner.nextLine();
+
+                //Exit when user type exit
                 if (input.equalsIgnoreCase("exit")) {
                     break;
                 }
+                //Check the input type
                 if (baseConverter.isBinary(input)) {
-                    output = baseConverter.binaryToDecimal(input);
-                }
-                if (calculator.isArithmetic(input)) {
+                    binaryOutput = baseConverter.binaryToDecimal(input);
+                    System.out.println("Out [" + index + "]: " + binaryOutput);
+                } else if (calculator.isArithmetic(input)) {
                     tokens = Calculator.tokenize(input);
                     postfix = calculator.ShuntingYard(tokens);
-                    output = calculator.evaluate(postfix);
+                    arithmeticOutput = (calculator.evaluate(postfix));
+                    System.out.println("Out [" + index + "]: " + arithmeticOutput);
                 }
                 //Output the result
-                System.out.println("Out [" + index + "]: " + output);
                 index++;
             }
+
             //Exit time delay
             try {
                 Thread.sleep(delay);

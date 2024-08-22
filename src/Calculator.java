@@ -45,11 +45,14 @@ public class Calculator {
         }
         return tokens;
     }
+
     //Check if token is binary operator
     public static boolean isBinaryOperator (char operator) {
         return operator == '+' || operator == '-' || operator == '*' || operator == '/';
     }
 
+
+    //Shunting-Yard algorithm
     public List<String> ShuntingYard (List<String> tokens) {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
@@ -89,8 +92,7 @@ public class Calculator {
         return output;
     }
 
-    //public
-
+    //Check if the expression is arithmetic
     public static boolean isArithmetic(String expression) {
         if (expression == null || expression.isEmpty()) {
             return false;
@@ -130,6 +132,8 @@ public class Calculator {
 
         return true;
     }
+
+
     //Precedence of each operator
     private static int precedence (String operator) {
         switch (operator) {
@@ -155,6 +159,7 @@ public class Calculator {
         }
     }
 
+    //Evaluate the find the result
     public double evaluate (List<String> Postfix) {
         Stack<Double> stack = new Stack<>();
         for (String token : Postfix) {
